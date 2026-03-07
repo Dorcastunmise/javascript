@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML & CSS Review</title>
+    <style>
+      /* .overview-btn, #appraised-btn{ */
+      button { 
+        color: white;
+        padding: 6px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+      }
+      .overview-btn{
+        background-color: rgb(113, 158, 158);
+      }
+
+      .appraised-btn{
+        background-color: rgb(113, 120, 158);
+      }
+    </style>
+  </head>
+<body>
+  <p>Adults Plain Cotton T-shirt</p>
+  <p>Price: $7.99</p>
+  <button title="Add to Cart" class="overview-btn"
+   onclick="btnUpdate()">
+    Add to Cart
+  </button> 
+  <button title="Add to Cart" class="overview-btn"
+   onclick="btnReset()">
+    Reset Now
+  </button> 
+  
+
+  <script>
+    let data = 0
+    let item = 'item';
+    function btnUpdate(){
+      data += 1;
+      if(data > 1) item = 'items';
+
+      console.log(`${item}: ${data}`);
+      alert(`Item added successfully! ${data} ${item} total in cart.`);      
+    }
+    function btnReset(){
+      data = 0;
+      console.log(`Loading`);
+      alert(`${item} have been reset successfully!`);
+    }
+
+  </script>
+</body>
+</html>
+
+
+

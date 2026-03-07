@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart</title>
+  <style>
+    button { 
+        color: white;
+        padding: 6px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        background-color: rgb(113, 158, 158);
+      }
+
+  </style>
+</head>
+<body>
+  <button onclick="displayQuantity()">Show Quantity</button>
+  <button onclick="removeQuantity()">Remove from Cart</button>
+  <button onclick="addCart()">Add to Cart</button>
+  <button onclick="addTwoItems()">+2</button>
+  <button onclick="addThreeItems()">+3</button>
+  <button onclick="ResetCart()">Reset Cart</button>
+
+  <script>
+    let cartQuantity = 0;
+    function addCart(){
+      cartQuantity++;
+      console.log(`Total quantity: ${cartQuantity}`);
+    }
+    function ResetCart(){
+      cartQuantity = 0;
+      console.log(`Total quantity reset to: ${cartQuantity}`);
+    }
+
+    function addTwoItems(){
+      cartQuantity += 2;
+      console.log(`Total quantity: ${cartQuantity}`);
+    }
+
+    function addThreeItems(){
+      cartQuantity += 3;
+      console.log(`Total quantity: ${cartQuantity}`);
+    }
+    function displayQuantity(){
+      console.log(`Current quantity: ${cartQuantity}`);
+    }
+    function removeQuantity(){
+      if(cartQuantity == 0) {
+        alert('No item in cart yet. Removal unsuccessful!!' );
+      } else {
+          cartQuantity--;
+          alert('Last item removed!');
+          console.log(`An item has been removed. Current quantity: ${cartQuantity}`);
+      }
+    }
+
+    let totalCost = (5+(3*2)+9);
+    let taxCost = (5+(3*2)+9) * 0.1;
+    let sum = totalCost + taxCost;
+    console.log('Cost of Food before tax: $'+totalCost + '\nCost of Food after tax: $'+ taxCost + '\nWhich totals to ' + sum);
+  </script>
+</body>
+</html>
