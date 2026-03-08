@@ -8,53 +8,134 @@
 <body>
 
   <p>Rock <span>=></span> Paper <span>=></span> Scissors</p>
-  <button onclick="RockClick('rock')">Rock</button>
-  <button onclick="PaperClick('paper')">Paper</button>
-  <button onclick="ScissorsClick('scissors')">Scissors</button>
+  <button onclick="rockClick('rock')">Rock</button>
+  <button onclick="paperClick('paper')">Paper</button>
+  <button onclick="scissorsClick('scissors')">Scissors</button>
+  <button onclick="resetScoreboard()">Reset Scores</button>
+
+  <br>
+  <div>
+    <p>Conversion of Length</p>
+    <button onclick="console.log(convertLength(32, 'km', 'miles'))">32 km to miles</button>
+    <button onclick="console.log(convertLength(5, 'km', 'ft'))">5 km to ft</button>
+    <button onclick="console.log(convertLength(5, 'miles', 'km'))">5 miles to km</button>
+    <button onclick="console.log(convertLength(5, 'miles', 'ft'))">5 miles to ft</button>
+    <button onclick="console.log(convertLength(9, 'ft', 'km'))">9 ft to km</button>
+    <button onclick="console.log(convertLength(6, 'ft', 'miles'))">6 ft to miles</button>
+    <br>
+
+  </div>
 
 
-  <script>
+  <script>  
+    let score = JSON.parse(localStorage.getItem('score')) || {
+      wins: 0,
+      losses: 0,
+      ties: 0,
+    };
     
-    randomNo = Math.random();
-    let computerMove = '';
+    /*
+    //if(score === null){
+    if(!score){
+      score = {
+        wins: 0,
+        losses: 0,
+        ties: 0,
+      };
+    } */
+    function pickComputerMove(){
+      let randomNo = Math.random();
+      let computerMove = '';
 
-    if(randomNo >= 0 && randomNo < 1/3) {
-      computerMove = 'rock';
+      if(randomNo >= 0 && randomNo < 1/3) {
+        computerMove = 'rock';
+      }
+      else if(randomNo >= 1/3 && randomNo < 2/3){ 
+        computerMove = 'paper';
+      }
+      else if(randomNo >= 2/3 && randomNo < 1) {
+        computerMove = 'scissors';
+      }
+      return computerMove;
     }
-    else if(randomNo >= 1/3 && randomNo < 2/3){ 
-      computerMove = 'paper';
+    
+    function btnClick(data){
+      let computerMove = pickComputerMove();
+      
+      
+      if(computerMove === 'rock' && data === 'rock') result = 'Tie!';
+      else if(computerMove === 'rock' && data === 'paper') result = 'You Win!';
+      else if(computerMove === 'rock' && data === 'scissors') result = 'You Lose!';
+
+      else if(computerMove === 'paper' && data === 'rock') result = 'You Lose!';
+      else if(computerMove === 'paper' && data === 'paper') result = 'Tie!';
+      else if(computerMove === 'paper' && data === 'scissors') result = 'You Win!';
+
+      else if(computerMove === 'scissors' && data === 'rock') result = 'You Win!';
+      else if(computerMove === 'scissors' && data === 'paper') result = 'You Lose!';
+      else if(computerMove === 'scissors' && data === 'scissors') result = 'Tie!';
+
+      if (result == 'You Win!') score.wins++;
+      if (result == 'You Lose!') score.losses++;
+      if (result == 'Tie!') score.ties++;
+
+      localStorage.setItem('score', JSON.stringify(score));
+
+      alert(`You picked ${data} while the computer picked ${computerMove}.\n ${result}. \n
+        Wins = ${score.wins}, Losses = ${score.losses}, Ties = ${score.ties}
+      `);
     }
-    else if(randomNo >= 2/3 && randomNo < 1) {
-      computerMove = 'scissors';
+    
+    function resetScoreboard(){
+      score.wins = 0;
+      score.losses = 0;
+      score.ties = 0;
+      localStorage.removeItem('score');
+    }
+  
+    function rockClick(data){
+      btnClick(data);
     }
 
-    console.log(computerMove);
-    function BtnClick(data){
-      if(computerMove === 'rock' && data === 'rock') alert(`You picked ${data} while the computer picked ${computerMove}. Tie!`);
-      else if(computerMove === 'rock' && data === 'paper') alert(`You picked ${data} while the computer picked ${computerMove}. You Win!`);
-      else if(computerMove === 'rock' && data === 'scissors') alert(`You picked ${data} while the computer picked ${computerMove}. You Lose!`);
-
-      else if(computerMove === 'paper' && data === 'rock') alert(`You picked ${data} while the computer picked ${computerMove}. You Lose!`);
-      else if(computerMove === 'paper' && data === 'paper') alert(`You picked ${data} while the computer picked ${computerMove}. Tie!`);
-      else if(computerMove === 'paper' && data === 'scissors') alert(`You picked ${data} while the computer picked ${computerMove}. You Win!`);
-
-      else if(computerMove === 'scissors' && data === 'rock') alert(`You picked ${data} while the computer picked ${computerMove}. You Win!`);
-      else if(computerMove === 'scissors' && data === 'paper') alert(`You picked ${data} while the computer picked ${computerMove}. You Lose!`);
-      else if(computerMove === 'scissors' && data === 'scissors') alert(`You picked ${data} while the computer picked ${computerMove}. Tie!`);
+    function paperClick(data){
+      btnClick(data);
     }
 
-    function RockClick(data){
-      BtnClick(data);
+    function scissorsClick(data){
+      btnClick(data);
     }
 
-    function PaperClick(data){
-      BtnClick(data);
+    function convertLength(length, from, to){
+      let kmeter = 1;
+      let mile = 1.6;
+      let newLength = 0;
+      let mileFeet = 5280;
+      let kmeterFeet = 3281;
+
+      let unit_arr = ['km','miles','ft'];
+
+      if(from == 'km' && to == 'miles' ) {
+        newLength = length / mile;
+      } else if(from == 'km' && to == 'km') {
+        newLength = length;
+      } else if(from == 'miles' && to == 'km'){
+        newLength = length * mile;
+      } else if(from == 'miles' && to == 'ft'){
+        newLength = length * mileFeet;
+      }else if(from == 'km' && to == 'ft'){
+        newLength = length * kmeterFeet;
+      } else if((!unit_arr.includes(from)) || (!unit_arr.includes(to))){
+        if(!unit_arr.includes(from)) {
+          return `invalid unit: ${from}`;
+        } else if(!unit_arr.includes(to)) {
+          return `invalid unit: ${to}`;
+        }
+      }
+
+      return newLength
     }
 
-    function ScissorsClick(data){
-      BtnClick(data);
-    }
-
+  
   </script>
   
 </body>

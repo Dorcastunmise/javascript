@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Objects</title>
+</head>
+<body>
+  <script>
+    /*
+      Built-in objects:
+      console
+      JSON
+      localStorage
+      Math
+      DOM
+    */
+    let data = {
+      player: 3,
+      session: '45.3s',
+      rating: {
+        count: 90,
+        ratings: 4.5
+      },
+      fun: function funcSel() {
+        console.log("a function within an object");
+      }
+    };
+
+    //to convert a javascript object into JSON
+    /*
+      A JSON has less features compared to javascript object-
+      1. it does not support functions within its object
+      2. Both property and values should be in double quotes
+    */
+    const jsonStr = JSON.stringify(data);
+
+    //to convert JSON into javascript object
+    JSON.parse(jsonStr);
+
+    //localStorage saves values more permanently and only supports strings. To set its item:
+    localStorage.setItem('name','value');
+    localStorage.getItem('name');
+
+    //Auto-boxing: javascript automatically wraps a string, numbers, booleans (except undefined and null data types) in a special object making it possible to have properties and methods e.g length property, toUpperCase() method
+    console.log('hello'.length);
+    console.log('hello'.toUpperCase());
+    console.log(true.toString());
+    console.log(3.0.toString());
+
+    /*
+      obj1 is a variable containing the reference that points to the object. So, in this case const prevents changing the reference in the variable. But, doesn't prevent reaching out to the object it's pointing to and changing its content
+    */
+    const obj1 = {
+      message: 'hello'
+    };
+
+    /*
+      Both point to the same object in the computer memory. And obj2, copies the reference of obj1
+    */
+    const obj2 = obj1;
+
+    obj1.message = 'good job';
+    console.log(obj1);
+    console.log(obj2); /*this returns good job even though it was obj1 that was modified.
+     This is because it was the object which obj1 and obj2 references that got changed
+     */
+
+    /*
+      Objects cannot/should not be compared directly. Recall they're references to actual objects in the computer's
+      memory. Here, object3 and (obj2 & obj3) are not equal,as they're different references. 
+    */
+    object3 = {
+      message: 'good job'
+    };
+    
+    console.log(obj1 == object3); //returns false because the refernces are compared not the values inside
+
+    object4 = {
+      message: 'good thing',
+      price: 7.99
+    };
+    /*
+      instead of doing this 
+      const message = object4.message;
+      const price = object4.price;
+      do this:
+    */
+    const { message, price } = object4;
+    const object5 = {
+      //message: message or just use
+      message, //shorthand
+      method: function funcObject() {
+        console.log('method');
+      }, // or use this shorthand method
+      newFunc() {
+        console.log(' shorthand method');
+      }
+    }
+    console.log(object5);
+  </script>
+</body>
+</html>

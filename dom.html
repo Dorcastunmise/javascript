@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM</title>
+</head>
+<body>
+
+  <!--Document Object models or represents the webpage.
+    It gives javascript full control of the webpage. It combines html and javascript together.
+  -->
+  <button class="js-btn">First button</button>
+  <button class="js-btn">Second button</button>
+
+  <script>
+    document.title = 'changed title'; 
+
+    /*document.body contains everything in the body tags and places it in the javascript
+      document.body.innerHTML gives all the html content inside the body
+      also when the content of the html is brought into javascript, it stores it as an object
+      typeof document.body = object
+    
+    console.log(document.body.innerHTML);
+    document.body.innerHTML = '<button>hi</button>';
+
+      document.querySelector() gets the first element (queried) from the page and puts it into the javascript
+    */
+    console.log(document.querySelector('button'));
+    //to control the HTML inside the element
+    document.querySelector('button').innerHTML = 'changed again';
+
+    //since the querySelector() selects the first occurring element, to be able to get all:
+    console.log(document.querySelector('.js-btn'));
+
+
+
+  </script>
+</body>
+</html>
