@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Objects</title>
+</head>
+<body>
+  
+  <p>YouTube Subscribe Button</p>
+  <button class="js-subscribe-btn" onclick="subscribe()">Subscribe</button>
+
+  <br><br>
+  <p>Amazon Shipping Calculator</p>
+  <input type="text" placeholder="Cost of Order" class="js-cost-input" onkeydown="handleCost(event)">
+  <button  onclick="calculateTotal()">Calculate</button>
+  <p class="js-total-cost"></p>
+
+  <script>
+    /*
+      every event listener gets an event object
+      clicks, keydowns = events
+      onclick, onkeydown, onscroll, onmouseenter(hovering over), onmouseleave(stop hovering over) = event listeners
+    */
+    function subscribe(){
+      const domElement = document.querySelector('.js-subscribe-btn');
+      
+      /*
+        innerText - gives the text itself without the surrounding whitespaces
+        innerHTML - gives the text with the surrounding whitespaces
+      */
+
+      if(domElement.innerText == "Subscribe"){
+        domElement.innerHTML  = "Subscribed";
+      } else {
+        domElement.innerHTML  = " Subscribe";
+      }
+    }
+    
+    function calculateTotal(){
+      const inputElement = document.querySelector('.js-cost-input');
+      let cost = Number(inputElement.value);
+      if (cost < 40) cost += 10;
+      document.querySelector('.js-total-cost').innerHTML = `$${cost}`;
+    }
+    
+    function handleCost(event) {
+      if (event.key == 'Enter') {
+        calculateTotal();
+      }
+    }
+ 
+ </script>
+</body>
+</html>

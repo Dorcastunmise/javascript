@@ -11,20 +11,14 @@
   <button onclick="rockClick('rock')">Rock</button>
   <button onclick="paperClick('paper')">Paper</button>
   <button onclick="scissorsClick('scissors')">Scissors</button>
+
+  <br><br>
+  <p class="js-result"></p>
+  <p class="js-moves"></p>
+  <p class="js-score"></p>
   <button onclick="resetScoreboard()">Reset Scores</button>
 
-  <br>
-  <div>
-    <p>Conversion of Length</p>
-    <button onclick="console.log(convertLength(32, 'km', 'miles'))">32 km to miles</button>
-    <button onclick="console.log(convertLength(5, 'km', 'ft'))">5 km to ft</button>
-    <button onclick="console.log(convertLength(5, 'miles', 'km'))">5 miles to km</button>
-    <button onclick="console.log(convertLength(5, 'miles', 'ft'))">5 miles to ft</button>
-    <button onclick="console.log(convertLength(9, 'ft', 'km'))">9 ft to km</button>
-    <button onclick="console.log(convertLength(6, 'ft', 'miles'))">6 ft to miles</button>
-    <br>
-
-  </div>
+  
 
 
   <script>  
@@ -34,6 +28,8 @@
       ties: 0,
     };
     
+    updScore();
+
     /*
     //if(score === null){
     if(!score){
@@ -79,11 +75,25 @@
       if (result == 'You Lose!') score.losses++;
       if (result == 'Tie!') score.ties++;
 
+      scoreDescription(result, computerMove, data);
       localStorage.setItem('score', JSON.stringify(score));
 
-      alert(`You picked ${data} while the computer picked ${computerMove}.\n ${result}. \n
+      updScore();
+      
+    }
+
+    function scoreDescription(result, computerMove, data) {
+      document.querySelector('.js-result').innerText = result;
+      let displData = `
+        You ${data} - ${computerMove} Computer
+      `;
+      document.querySelector('.js-moves').innerHTML = displData;
+    }
+
+    function updScore() {
+      document.querySelector('.js-score').innerHTML = `
         Wins = ${score.wins}, Losses = ${score.losses}, Ties = ${score.ties}
-      `);
+      `;
     }
     
     function resetScoreboard(){
@@ -91,6 +101,7 @@
       score.losses = 0;
       score.ties = 0;
       localStorage.removeItem('score');
+      updScore();
     }
   
     function rockClick(data){
@@ -105,37 +116,7 @@
       btnClick(data);
     }
 
-    function convertLength(length, from, to){
-      let kmeter = 1;
-      let mile = 1.6;
-      let newLength = 0;
-      let mileFeet = 5280;
-      let kmeterFeet = 3281;
-
-      let unit_arr = ['km','miles','ft'];
-
-      if(from == 'km' && to == 'miles' ) {
-        newLength = length / mile;
-      } else if(from == 'km' && to == 'km') {
-        newLength = length;
-      } else if(from == 'miles' && to == 'km'){
-        newLength = length * mile;
-      } else if(from == 'miles' && to == 'ft'){
-        newLength = length * mileFeet;
-      }else if(from == 'km' && to == 'ft'){
-        newLength = length * kmeterFeet;
-      } else if((!unit_arr.includes(from)) || (!unit_arr.includes(to))){
-        if(!unit_arr.includes(from)) {
-          return `invalid unit: ${from}`;
-        } else if(!unit_arr.includes(to)) {
-          return `invalid unit: ${to}`;
-        }
-      }
-
-      return newLength
-    }
-
-  
+    
   </script>
   
 </body>
