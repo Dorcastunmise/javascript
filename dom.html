@@ -12,6 +12,19 @@
   -->
   <button class="js-btn">First button</button>
   <button class="js-btn">Second button</button>
+  <br><br>
+  <div>
+    <button onclick="callHandling('head')">Heads</button>
+    <button onclick="callHandling('tails')">Tails</button>
+    <p class="selection"></p>
+  </div>
+
+  <br><br>
+  <div>
+    <input type="text" placeholder="Name" class="js-name" onkeydown="nameModifier(event)">
+    <button type="submit" onclick="nameSubmission(event)">Submit</button>
+    <p class="js-name-output"></p>
+  </div>
 
   <script>
     document.title = 'changed title'; 
@@ -33,8 +46,32 @@
     //since the querySelector() selects the first occurring element, to be able to get all:
     console.log(document.querySelector('.js-btn'));
 
+    function handlePhase(data) {
+      const slctField = document.querySelector('.selection');
 
+      if(data == 'head') slctField.innerText = 'You chose: heads';
+      else if(data == 'tails') slctField.innerText = 'You chose: tails';
 
+    }
+
+    function callHandling(data) {
+      handlePhase(data);
+    }
+
+    function nameData() {
+      const nameInput = document.querySelector('.js-name');
+      
+      document.querySelector('.js-name-output').innerText = `Your name is: ${nameInput.value}`;
+    }
+    function nameModifier(event) {
+      
+      if(event.key == 'Enter'){
+        nameData();
+      }
+    }
+    function nameSubmission(){
+      nameData();
+    }
   </script>
 </body>
 </html>
