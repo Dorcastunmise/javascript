@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toggling Buttons</title>
+  <style>
+    button {
+      background-color: rgb(240, 240, 240);
+      color: black;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      padding: 15px;
+      margin: 5px;
+      transition: 0.3s;
+    }
+
+    .is-toggled {
+      background-color: rgb(25, 25, 25);
+      color: white;
+    }
+
+    .controls {
+      margin-bottom: 20px;
+      padding: 10px;
+      background: #eee;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="controls">
+    <label>
+      <input type="checkbox" id="multiMode"> Enable Multi-select Mode
+    </label>
+  </div>
+
+  <button onclick="toggleBtn(this)" class="gaming-btn">Gaming</button>
+  <button onclick="toggleBtn(this)" class="music-btn">Music</button>
+  <button onclick="toggleBtn(this)" class="tech-btn">Tech</button>
+   
+  <script>
+    function toggleBtn(element) {
+      const isMultiMode = document.getElementById('multiMode').checked;
+
+      if (isMultiMode) {
+        element.classList.toggle('is-toggled');
+      } else {
+        const isAlreadyToggled = element.classList.contains('is-toggled');
+        
+        document.querySelectorAll('button').forEach(btn => {
+          btn.classList.remove('is-toggled');
+        });
+
+        if (!isAlreadyToggled) {
+          element.classList.add('is-toggled');
+        }
+      }
+    }
+  </script>
+</body>
+</html>
