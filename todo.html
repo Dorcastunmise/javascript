@@ -4,17 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>To-do List</title>
+  <link rel="stylesheet" href="styles/todo.css">
 </head>
 <body>
-
+<!-- 
   <p>Todo List 1:</p>
   <input type="text" placeholder="todo identifier" class="js-todo-input">
-  <button onclick="addTodo('js-todo-input')">Add</button>
+  <button onclick="addTodo('js-todo-input')">Add</button> -->
 
-  <p>Todo List 2:</p>
-  <input type="text" placeholder="todo identifier" class="js-todo-input2">
-  <button onclick="renderTodo('js-todo-input2')">Add</button>
-  <div class="display-html"></div>
+  <p>Todo List:</p>
+  <div class="todo-input-grid">
+    <input type="text" placeholder="todo identifier" class="js-todo-input name-input" onkeypress="handleKeyInput(event)">
+    <input type="date" class="js-dueDate due-input">
+    <button onclick="addTodo()" class="addbtn">Add</button>
+  </div>
+
+  <div class="display-html todo-grid"></div>
 
   <script src="scripts/todo.js">
     /*

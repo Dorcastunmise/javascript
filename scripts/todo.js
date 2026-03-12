@@ -1,21 +1,60 @@
-const todoList = [];
+const todoList = [{
+  name: 'Alicia',
+  dueDate: '12-03-2026'
+},{
+  name: 'Rimpon',
+  dueDate: '12-03-2025'
+}];
 
-function addTodo(cls){
-  const inputField = document.querySelector(`.${cls}`);
+
+function addTodo(){
+  const inputField = document.querySelector('.js-todo-input');
   const inputValue = inputField.value;
+  const date = document.querySelector('.js-dueDate');
+  const dueDate = date.value;
 
-  todoList.push(inputValue);
+  todoList.push({
+    name: inputValue,
+    //dueDate: dueDate
+    dueDate // shorthand property
+  });
   inputField.value = '';
+  renderTodo();
 }
 
-function renderTodo(cls) {
-  addTodo(cls);
+function handleKeyInput(event){
+  if(event.key == "Enter") {
+    addTodo();
+  }
+}
+
+function renderTodo() {
+  
   let todoListHtml = '';
 
-  for(let i = 0; i < todoList.length; i++) {
+  for(let i = 1; i < todoList.length; i++) {
     const todo = todoList[i];
-    const htmlDisplay = `<p>${todo}</p>`;
+    /*
+    const todoName = todo.name;
+    const todoDueDate = todo.dueDate;
+    */
+   const {name, dueDate} = todo;
+
+
+    const htmlDisplay = `
+      <div>${name}</div>
+        <div>${dueDate}</div>
+          <button 
+            onclick="
+            todoList.splice(${i}, 1);
+            renderTodo();
+            "
+          >
+            Delete
+          </button>
+      `;
     todoListHtml += htmlDisplay;
+
     document.querySelector('.display-html').innerHTML = todoListHtml;
   }
 }
