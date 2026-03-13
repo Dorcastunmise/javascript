@@ -45,6 +45,7 @@ function renderTodo() {
       <div>${name}</div>
         <div>${dueDate}</div>
           <button 
+            class="delete-btn"
             onclick="
             todoList.splice(${i}, 1);
             renderTodo();

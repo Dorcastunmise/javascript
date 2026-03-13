@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    const itemArr = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry', 'Cherry', 'Grape', 'Honeydew'];
+
+    function unique(arr, word) {
+      let uniqueArr = [];
+      count = 0;
+
+      for(let i = 0; i < arr.length; i++){
+        let indexPos = findIndex(arr, word);
+        if(indexPos != -1 && count < 2 && !uniqueArr.includes(arr[i])) {
+          uniqueArr.push(arr[i]);
+        } else {
+          count++;
+        }
+      }
+      return uniqueArr;
+    }
+    const uniqueAns = JSON.stringify(unique(itemArr, 'Honeydew'));
+    localStorage.setItem('uniqueItems', uniqueAns);
+    console.log(JSON.parse(localStorage.getItem('uniqueItems')));
+
+
+    
+    console.log('----------------------------------');
+    const greetings = ['Hello', 'Hi', 'Hey', 'Welcome', 'Salutations', 'Howdy', 'Hola', 'Welcome','Bonjour', 'Ciao', 'Namaste'];
+
+    function findIndex(arr, word) {
+      for(let i = 0; i < arr.length; i++){
+        if(arr[i] == word){
+          console.log(`${word} is situated first at index => ${i}!`);
+          return i;
+        }
+        if (i == arr.length - 1 && arr[i] != word) return -1;
+      }
+    }
+
+    console.log(findIndex(greetings, 'Welcome'));
+    console.log(findIndex(greetings, 'Guten Tag'));
+
+    //----------------------------------
+    console.log('----------------------------------');
+    const snackFood = ['Sushi', 'Pizza', 'Burger', 'Pasta', 'Sushi', 'Tacos', 'Salad', 'Steak', 'Ramen', 'Curry', 'Dumplings', 'Sushi'];
+
+    function removeItem(food, item) {
+      let result = [];
+      let count = 0;
+      let n =  food.length;
+      
+      for (let index = 0; index < n; index++) {
+        //
+        if(food[index] == item && count < 2) {
+          count++;
+          continue;
+        }
+        result.push(food[index]);
+      }
+      return result.reverse();
+    }
+
+    console.log(removeItem(snackFood.slice().reverse(), 'Sushi'));
+
+    console.log('----------------------------------');
+    for(let i = 0; i <= 20; i++) {
+      
+      if (i % 5 == 0 && i % 3 == 0) console.log('FizzBuzz');
+      else if (i % 3 == 0) console.log('Fizz');
+      else if (i % 5 == 0) console.log('Buzz');
+    }
+
+
+    
+
+  </script>
+</body>
+</html>
