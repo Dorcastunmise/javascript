@@ -22,6 +22,10 @@ function addTodo(){
   renderTodo();
 }
 
+document.querySelector('.js-addbtn').addEventListener('click', () => {
+  addTodo();
+});
+
 function handleKeyInput(event){
   if(event.key == "Enter") {
     addTodo();
@@ -38,11 +42,7 @@ function renderTodo() {
       <div>${name}</div>
         <div>${dueDate}</div>
           <button 
-            class="delete-btn"
-            onclick="
-            todoList.splice(${index}, 1);
-            renderTodo();
-            "
+            class="delete-btn js-delete-btn"
           >
             Delete
           </button>
@@ -79,6 +79,22 @@ function renderTodo() {
   */
 
   document.querySelector('.display-html').innerHTML = todoListHtml;
+
+  /*
+    This addEventListener() is used instead of using 
+      onclick="
+        todoList.splice(${index}, 1);
+        renderTodo();
+      "
+  */
+ 
+  document.querySelectorAll('.js-delete-btn')
+  .forEach((deleteBtn, index) => {
+    deleteBtn.addEventListener('click', () => {
+      todoList.splice(index, 1);
+      renderTodo();
+    });
+  });
 }
 
 renderTodo();

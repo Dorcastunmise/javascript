@@ -35,9 +35,12 @@ function pickComputerMove(){
 let autoplay = false;
 let intervalId;
 
+//const handleAutoPlay = () => {}; - affects readability and does not support hoisting. Calling it before being created gives error. The order of writing the code matters
+
+//function handleAutoPlay() {} - easier to read and supports hoisting
 function handleAutoPlay() {
   if (!autoplay) {
-    intervalId = setInterval(function() {
+    intervalId = setInterval(() => {
       const playerMove = pickComputerMove();
       btnClick(playerMove);
     }, 1000);
@@ -49,6 +52,29 @@ function handleAutoPlay() {
   
 }
 
+document.querySelector('.js-rock-btn').addEventListener('click',() => {
+  btnClick('rock');
+});
+
+document.querySelector('.js-paper-btn').addEventListener('click', () => {
+  btnClick('paper');
+});
+
+document.querySelector('.js-scissors-btn').addEventListener('click', () => {
+  btnClick('scissors');
+});
+
+document.body.addEventListener('keydown', (event) => {
+  if (event.key == 'r') {
+    btnClick('rock');
+  } 
+  else if (event.key == 'p') {
+    btnClick('paper');
+  } 
+  else if (event.key == 's') {
+    btnClick('scissors');
+  } 
+});
 
 function btnClick(data){
   let computerMove = pickComputerMove();
