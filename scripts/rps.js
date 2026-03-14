@@ -52,6 +52,17 @@ function handleAutoPlay() {
   
 }
 
+let autoTxt = document.querySelector('.js-autoplay');
+autoTxt.addEventListener('click',() => {
+  handleAutoPlay();
+  if(autoTxt.innerText == 'Stop Playing') autoTxt.innerText = 'Auto Play';
+  else autoTxt.innerText = 'Stop Playing';
+});
+
+document.body.addEventListener('keydown', (event) => {
+  if(event.key == 'a') handleAutoPlay();
+});
+
 document.querySelector('.js-rock-btn').addEventListener('click',() => {
   btnClick('rock');
 });
@@ -127,6 +138,20 @@ function resetScoreboard(){
   localStorage.removeItem('score');
   updScore();
 }
+
+document.querySelector('.js-reset-btn').addEventListener(('click'), () => {
+  okval = confirm('Are you sure you want to reset the score?');
+  if(okval){
+    resetScoreboard();
+  }
+});
+
+document.body.addEventListener(('keydown'), (event) => {
+  okval = confirm('Are you sure you want to reset the score?');
+  if(okval){
+    if (event.key == 'Backspace') resetScoreboard();
+  }
+});
 
 function rockClick(data){
   btnClick(data);

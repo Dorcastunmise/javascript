@@ -13,8 +13,8 @@
     <p class="cartItem"></p>
 
     <br><br>
-    <button onclick="handleTitleCnt('add')">Add</button>
-    <button onclick="handleTitleCnt('remove')">Remove</button>
+    <button class="js-add-btn">Add</button>
+    <button class="js-remove-btn">Remove</button>
 
     <br><br>
     <button class="js-btn">Click for Event Listener Test</button>
@@ -81,7 +81,7 @@
           cmdBtn.innerText = (previousTxt === 'Start') ? 'Finished!' : 'Start';
         }, 1000);
     }
-
+    */
     let timeoutID;
     function handleCart() {
       clearTimeout(timeoutID);
@@ -126,6 +126,14 @@
     }
 
     titleSelectn();
+    
+    document.querySelector('.js-add-btn').addEventListener(('click'), ()=> {
+      handleTitleCnt('add');
+    });
+    
+    document.querySelector('.js-remove-btn').addEventListener(('click'), ()=> {
+      handleTitleCnt('remove');
+    });
 
     //shorthand for functions in objects 
     const obj1 = {
@@ -133,29 +141,77 @@
       //this is not easier to read=> method: () => {}
     };
  
-    */
+    
   
     /*
       .filter() :-
       it creates a new array
       if its inner function returns true, it stores the value in the created array
-    */
+   
 
     console.log([1, -3, 5].filter((value, index) => {
       return (value >= 0);
     })); //logged array = [1,5]
+    */
 
     /* 
       .map() - it transforms an array into another array():-
       creates a new array
       whatever is returned is added to the created array
-    */
+    
     
     console.log(  
       [1, 1, 3].map((value, index) => {
         return value + value;   
       })
     );
+
+    console.log(  
+      [1, 1, 3].map(value => value + value ));
+
+    
+    */
+
+    let multiply = (val1, val2) => val1 * val2; 
+    let numbers = [3, 4, 6, 1, 8.0, 0.003, 0.5, -2];
+    let addNumbering = [-2, -1, 0, 99];
+    let foodLst = ['egg', 'apple', 'egg', 'egg', 'ham'];
+
+
+    function createPositive(numsarr) {
+      let count = 0;
+      numsarr.forEach((num, index) => {
+        if(num > 0) count++;
+      })
+
+      return count;
+    }
+
+    function addNum(arr, num) {
+      const res = arr.map((val) => val + num);
+
+      return res;
+    }
+
+    function removeEgg(foods) {
+      let standard = [];
+      let cntEgg = 0;
+      foods.filter((value) => {
+        if (value == 'egg') {
+          cntEgg++;
+          if(cntEgg > 2) standard.push(value);
+        }
+        else standard.push(value);
+      });
+
+      return standard;
+    }
+
+    console.log(multiply(7, 10));
+    console.log(createPositive(numbers));
+    console.log(addNum(addNumbering, 2));
+    console.log(removeEgg(foodLst));
+
   </script>
   
 </body>

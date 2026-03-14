@@ -87,7 +87,11 @@ function renderTodo() {
         renderTodo();
       "
   */
- 
+
+  /*
+    Closure:-
+      If a function has access to a value, it will always have have access to that value. That value gets packaged together (enclosed) with the function e.g index is accessible within the .forEach()
+  */
   document.querySelectorAll('.js-delete-btn')
   .forEach((deleteBtn, index) => {
     deleteBtn.addEventListener('click', () => {
