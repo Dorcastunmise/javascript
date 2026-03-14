@@ -15,6 +15,8 @@ if(!score){
     ties: 0,
   };
 } */
+
+
 function pickComputerMove(){
   let randomNo = Math.random();
   let computerMove = '';
@@ -30,6 +32,23 @@ function pickComputerMove(){
   }
   return computerMove;
 }
+let autoplay = false;
+let intervalId;
+
+function handleAutoPlay() {
+  if (!autoplay) {
+    intervalId = setInterval(function() {
+      const playerMove = pickComputerMove();
+      btnClick(playerMove);
+    }, 1000);
+    autoplay = true;
+  } else{
+    clearInterval(intervalId);
+    autoplay = false;
+  }
+  
+}
+
 
 function btnClick(data){
   let computerMove = pickComputerMove();

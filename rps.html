@@ -9,36 +9,27 @@
 <body>
 
   <p>Rock Paper Scissors</p>
-  <button 
-    onclick="rockClick('rock')"
-    class="emoji-btn"
-  >
+  <button onclick="rockClick('rock')" class="emoji-btn">
     <img src="images/rock-emoji.png" alt="rock">
   </button>
-
-  <button 
-    onclick="paperClick('paper')"
-    class="emoji-btn"
-  >
+  
+  <button onclick="paperClick('paper')" class="emoji-btn">
     <img src="images/paper-emoji.png" alt="paper">
   </button>
-
-  <button 
-    onclick="scissorsClick('scissors')"
-    class="emoji-btn"
-  >
+  
+  <button onclick="scissorsClick('scissors')" class="emoji-btn">
     <img src="images/scissors-emoji.png" alt="scissors">
   </button>
-
+  
   <br><br>
   <p class="js-result result"></p>
   <p class="js-moves">
-    
+  
   </p>
   <p class="js-score score"></p>
-
+  
   <button onclick="resetScoreboard()" class="reset-btn">Reset Scores</button>
-
+  <button class="autoplay-btn" onclick="handleAutoPlay()">Auto Play</button>
   <script src="scripts/rps.js"></script>
 </body>
 </html>

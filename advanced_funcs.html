@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+</head>
+<body>
+  <div>
+    <button class="command" onclick="handleCommand()">Start</button>
+    <br><br>
+    <button class="addItem" onclick="handleCart()">Add to Cart</button>
+    <p class="cartItem"></p>
+
+    <br><br>
+    <button onclick="handleTitleCnt('add')">Add</button>
+    <button onclick="handleTitleCnt('remove')">Remove</button>
+  </div>
+
+  <script>
+    /*
+    setTimeout(() => {
+      console.log('timeout');
+      console.log('2');
+    }, 3000);
+
+    setInterval(() => {
+      console.log('interval');
+    }, 3000);
+    
+    [
+      'washes dishes',
+      'watch youtube',
+      'water the plants'
+    ].forEach((value,index) => {
+      if(value == 'washes dishes') return;
+      console.log(index);
+      console.log(value);
+    });
+    */
+
+    let add = () => {
+      console.log(2+3);
+    };
+
+    function runTwice(fun) {
+      fun();
+      if(fun()) return;
+    }
+    runTwice(function(){
+      console.log('12b');
+    })
+
+    function handleCommand(){
+      const cmdBtn = document.querySelector('.command');
+      const previousTxt = cmdBtn.innerText;
+
+      cmdBtn.innerText = 'Loading...';
+      setTimeout(() => {
+          cmdBtn.innerText = (previousTxt === 'Start') ? 'Finished!' : 'Start';
+        }, 1000);
+    }
+
+    let timeoutID;
+    function handleCart() {
+      clearTimeout(timeoutID);
+
+      const cartBtn = document.querySelector('.cartItem');
+      cartBtn.innerText = 'Added';
+      timeoutID = setTimeout(() => {
+        cartBtn.innerText = '';
+      },6000);
+    }
+  
+    //document title
+    
+    let titles = ['Advanced Functions', 'App', '(2) New Messages', 'Exercises', 'Tutorials'];
+    let currentIndex = 0;
+    let maxItems = titles.length; 
+
+    function titleSelectn() {
+      setInterval(() => {
+        if (maxItems > 0) {
+          document.title = titles[currentIndex];
+          currentIndex = (currentIndex + 1) % maxItems;
+        } else {
+          document.title = 'No Messages';
+        }
+      }, 1000);
+    }
+
+    function handleTitleCnt(action) {
+      if (action === 'add') {
+        if (maxItems < titles.length) {
+          maxItems++;
+        }
+      } else if (action === 'remove') {
+        if (maxItems > 0) {
+          maxItems--;
+          if (currentIndex >= maxItems) {
+            currentIndex = 0;
+          }
+        }
+      }
+    }
+
+    titleSelectn();
+  </script>
+  
+</body>
+</html>
