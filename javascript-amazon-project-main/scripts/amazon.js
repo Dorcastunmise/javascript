@@ -1,4 +1,8 @@
+import { cart as myCart } from "../data/cart";
+import { products } from "../data/products";
+
 let productsHtml = '';
+
 products.forEach((product) => {
   const {id, image, name, rating, priceCents, keywords} = product;
   const productHtml = 
@@ -73,7 +77,7 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
     const productId = button.dataset.productId;
     let matchingItem;
 
-    cart.forEach((item) => {
+    myCart.forEach((item) => {
       if(productId == item.productId) {
         matchingItem = item;
       }
@@ -82,7 +86,7 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
     if(matchingItem) {
       matchingItem.quantity++;
     } else {
-      cart.push({
+      myCart.push({
         productId: productId,
         quantity: 1
       });

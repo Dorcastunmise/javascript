@@ -59,11 +59,19 @@
       1. Save the data e.g product.js
       2. Generate the HTML e.g amazon.js (productsHtml)
       3. Make it interactive e.g amazon.js (data attribute)
+
+      Creation of Modules (created to avoid naming conflicts and does not require worrying about order of files e.g cart and products have to come before amazon.js (to make its code get data from products and cart), thereby providing a btter way to organize  the code.
+        <script src="./data/cart.js"></script> 
+        <script src="./data/products.js"></script>
+        <script src="./scripts/amazon.js"></script>
+      ):
+      1. Create a file : use type="module", export and import the target variable/data structure.
+      2. Don't load the file with <script>
+
+      Modules do not work if the HTML is open directly e.g from file explorer. But rather works when opened from a live server
     -->
 
-    <script src="./data/cart.js"></script>
-    <script src="./data/products.js"></script>
-    <script src="./scripts/amazon.js"></script>
+    <script type="module" src="./scripts/amazon.js"></script>
     
   </body>
 </html>
