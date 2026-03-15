@@ -1,6 +1,6 @@
 let productsHtml = '';
 products.forEach((product) => {
-  const {image, name, rating, priceCents} = product;
+  const {id, image, name, rating, priceCents, keywords} = product;
   const productHtml = 
   `
     <div class="product-container">
@@ -47,7 +47,11 @@ products.forEach((product) => {
         Added
       </div>
 
-      <button class="add-to-cart-button button-primary">
+      <!--A data attribute is an HTML attribute enables the attachment of any info to an element.
+        Its syntax requires a prefix of "data-"-->
+      <button class="add-to-cart-button button-primary js-add-to-cart"
+        data-product-id="${id}"
+      >
         Add to Cart
       </button>
     </div>
@@ -57,3 +61,34 @@ products.forEach((product) => {
 });
 
 document.querySelector('.js-products-grid').innerHTML = productsHtml;
+
+
+document.querySelectorAll('.js-add-to-cart').forEach((button) => {
+  button.addEventListener('click', () => {
+    /*
+      dataset provides all the data attribute attached to the button.
+      e.g button.dataset gives:
+      DOMStringMap {productId: '5968897c-4d27-4872-89f6-5bcb052746d7'}productId: "5968897c-4d27-4872-89f6-5bcb052746d7"[[Prototype]]: DOMStringMap
+    */
+    const productId = button.dataset.productId;
+    let matchingItem;
+
+    cart.forEach((item) => {
+      if(productId == item.productId) {
+        matchingItem = item;
+      }
+    });
+
+    if(matchingItem) {
+      matchingItem.quantity++;
+    } else {
+      cart.push({
+        productId: productId,
+        quantity: 1
+      });
+    }   
+
+    console.log(cart);
+  
+  });
+})
