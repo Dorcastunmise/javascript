@@ -28,5 +28,10 @@ function addToCart(productId) {
   }
 }
 
-
-export { addToCart };
+function deleteCartItem(){
+  const newCart = [];
+  cart.forEach((cartItem) => {
+    
+  });
+}
+export { addToCart, deleteCartItem };
