@@ -1,4 +1,6 @@
-import { cart as myCart } from "../data/cart";
+import { addToCart} from "../data/cart";
+//or import * as CartModule from "../data/cart"; 
+// then to use its content:CartModule.addToCart()
 import { products } from "../data/products";
 
 let productsHtml = '';
@@ -66,6 +68,16 @@ products.forEach((product) => {
 
 document.querySelector('.js-products-grid').innerHTML = productsHtml;
 
+//updateCartQuantity() stays in this file because it updates the page i.e cart quantity in the header, which is part of the DOM structure of this page. If we put it in cart.js, then we would have to import that function into this file and then call it here, which is not ideal because cart.js should only be responsible for managing the cart data, not updating the DOM.
+function updateCartQuantity() {
+  let cartQuantity = 0; 
+  
+  cart.forEach((cartItem) => {
+    cartQuantity += cartItem.quantity;
+  });
+
+  document.querySelector('.js-cart-quantity').innerText = cartQuantity;
+}
 
 document.querySelectorAll('.js-add-to-cart').forEach((button) => {
   button.addEventListener('click', () => {
@@ -75,29 +87,8 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
       DOMStringMap {productId: '5968897c-4d27-4872-89f6-5bcb052746d7'}productId: "5968897c-4d27-4872-89f6-5bcb052746d7"[[Prototype]]: DOMStringMap
     */
     const productId = button.dataset.productId;
-    let matchingItem;
-
-    myCart.forEach((item) => {
-      if(productId == item.productId) {
-        matchingItem = item;
-      }
-    });
-
-    if(matchingItem) {
-      matchingItem.quantity++;
-    } else {
-      myCart.push({
-        productId: productId,
-        quantity: 1
-      });
-    }   
-
-    let cartQuantity = 0;
-    cart.forEach((item) => {
-      cartQuantity += item.quantity;
-    });
-
-    document.querySelector('.js-cart-quantity').innerText = cartQuantity;
+    addToCart(productId);
+    updateCartQuantity();
   
   });
-})
+});
