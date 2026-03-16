@@ -1,4 +1,4 @@
-import {cart} from '../data/cart.js';
+import {cart, deleteCartItem} from '../data/cart.js';
 import {products} from '../data/products.js';
 import { formatCurrency } from '../utils/currency.js';
 let cartHtml = '';
@@ -101,8 +101,9 @@ cart.forEach((cartItem) => {
 document.querySelector('.js-cart').innerHTML = cartHtml;
 
 document.querySelectorAll('.js-delete-item').forEach((deleteButton) => {
-    deleteButton.addEventListener('click', (event) => {
-      let deletItem = deleteButton.dataset.productId;
+    deleteButton.addEventListener('click', () => {
+      const productId = deleteButton.dataset.productId;
+      deleteCartItem(productId);
         
     });
   });
