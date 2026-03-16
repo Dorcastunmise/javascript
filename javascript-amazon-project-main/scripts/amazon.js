@@ -1,4 +1,4 @@
-import { addToCart} from "../data/cart.js";
+import { addToCart, cart} from "../data/cart.js";
 //or import * as CartModule from "../data/cart"; 
 // then to use its content:CartModule.addToCart()
 import { products } from "../data/products.js";
