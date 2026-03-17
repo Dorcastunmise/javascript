@@ -1,3 +1,4 @@
+
 export let cart = JSON.parse(localStorage.getItem('cart'));
 
 if(!cart){
@@ -57,7 +58,7 @@ function deleteCartItem(productId){
   CartQuantity();
 }
 
-function calulateCartQuantity() {
+function calculateCartQuantity() {
   let cartQuantity = 0; 
 
   cart.forEach((cartItem) => {
@@ -68,7 +69,7 @@ function calulateCartQuantity() {
 }
 
 function CartQuantity() {
-  let cartQuantity = calulateCartQuantity();
+  let cartQuantity = calculateCartQuantity();
 
   const quantityElement = document.querySelector('.js-checkout-items-link');
   
@@ -102,4 +103,4 @@ function updateDeliveryOption(productId, deliveryOptionId){
 }
 
 
-export { addToCart, deleteCartItem, CartQuantity, calulateCartQuantity, updateQuantity, updateDeliveryOption };
+export { addToCart, deleteCartItem, CartQuantity, calculateCartQuantity, updateQuantity, updateDeliveryOption };

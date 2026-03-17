@@ -1,4 +1,4 @@
-import { addToCart, calulateCartQuantity} from "../data/cart.js";
+import { addToCart, calculateCartQuantity} from "../data/cart.js";
 //or import * as CartModule from "../data/cart"; 
 // then to use its content:CartModule.addToCart()
 import { products } from "../data/products.js";
@@ -73,7 +73,7 @@ document.querySelector('.js-products-grid').innerHTML = productsHtml;
 
 function updateCartQuantity() {
   
-  let cartQuantity = calulateCartQuantity();
+  let cartQuantity = calculateCartQuantity();
 
   document.querySelector('.js-cart-quantity').innerText = cartQuantity; 
 }
