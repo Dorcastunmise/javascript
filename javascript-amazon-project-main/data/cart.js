@@ -97,10 +97,7 @@ function updateDeliveryOption(productId, deliveryOptionId){
   }); 
 
   matchingItem.deliveryOptionId = deliveryOptionId;
-
   saveStorage();
-  //refresh page
-  location.reload();
   
 }
 
