@@ -1,4 +1,4 @@
-import {cart, deleteCartItem, CartQuantity, updateQuantity} from '../data/cart.js';
+import {cart, deleteCartItem, CartQuantity, updateQuantity, updateDeliveryOption} from '../data/cart.js';
 import {products} from '../data/products.js';
 import { formatCurrency } from '../utils/currency.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
@@ -101,7 +101,10 @@ function deliveryOptionSection(matchingProduct, cartItem) {
 
     optionsHTML += 
     `
-      <div class="delivery-option">
+      <div class="delivery-option js-delivery-option"
+        data-product-id="${matchingProduct.id}"
+        data-delivery-option-id="${deliveryOption.id}"
+      >
         <input type="radio" 
           ${ischecked ? 'checked' : ''}
           class="delivery-option-input"
@@ -125,7 +128,18 @@ function deliveryOptionSection(matchingProduct, cartItem) {
 }
 
 document.querySelector('.js-cart').innerHTML = cartHtml;
-
+document.querySelectorAll('.js-delivery-option').forEach((radio_element)=>{
+  radio_element.addEventListener('click', () =>{
+    /*
+      const productId = radio_element.dataset.productId;
+      const deliveryOptionId = radio_element.dataset.deliveryOptionId;
+      or
+    */
+    const {productId, deliveryOptionId} = radio_element.dataset;
+    updateDeliveryOption(productId, deliveryOptionId);
+    
+  });
+});
 
 document.querySelectorAll('.js-delete-item').forEach((deleteButton) => {
     deleteButton.addEventListener('click', () => {
