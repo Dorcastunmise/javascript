@@ -15,7 +15,7 @@ else console.log('0: failed');
 if(formatCurrency(2000.5) === '20.01') console.log('2000.5: passed');
 else console.log('2000.5: failed');
 
-//2000.4 test case
+//2000.4 test  case
 if(formatCurrency(2000.4) === '20.00') console.log('2000.4: passed');
 else console.log('2000.4: failed');
 
