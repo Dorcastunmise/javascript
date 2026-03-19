@@ -1,5 +1,8 @@
 import {addToCart, cart, loadStorage} from '../../data/cart.js'
 
+
+
+//Unit Testing
 //Test Coverage: How much of the code is being tested
 // Flaky test: A test that sometimes passes and sometimes fails
 // Mock: replacing a method with a fake version. And a mock only lasts for one test and once that test is finished, the method is no longer mocked
