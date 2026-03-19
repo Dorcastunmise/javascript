@@ -1,4 +1,4 @@
-import  { formatCurrency } from '../utils/currency.js'
+import  { formatCurrency } from '../../utils/currency.js'
 
 // Basic test cases: to test if the code is working (e.g 2095)
 // Edge Cases: testing with tricky values and on the edge of what the code can handle (e.g 0, 2000.5 in this example)

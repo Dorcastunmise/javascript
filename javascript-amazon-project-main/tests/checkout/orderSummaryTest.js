@@ -1,5 +1,5 @@
-import renderOrderSummary from '../../scripts/checkout/orderSummary.js'
-import { loadStorage, cart } from '../../data/cart.js';
+import renderOrderSummary from '../../../scripts/checkout/orderSummary.js'
+import { loadStorage, cart } from '../../../data/cart.js';
 
 //Integration Test: testing many units.pieces of code working together
 //Hooks: enables the running of code for each test. Hooks in jasmine examples include beforeEach(), afterEach(), beforeAll(), afterAll()
