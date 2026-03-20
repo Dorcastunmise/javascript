@@ -3,16 +3,16 @@
 class Cart
 {
   cartItems;
-  localStorageKey;
+  #localStorageKey; // the "#" signifies/denotes that localStorageKey is a private property of class Cart
 
   constructor(localStorageKey){
-    this.localStorageKey = localStorageKey;
-    this.loadStorage();
+    this.#localStorageKey = localStorageKey;
+    this.#loadStorage();
   }
 
-  loadStorage(){
+  #loadStorage(){
     //using this to avoid inaccessibility or conflict when the object variable.name changes
-    this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey));
+    this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey));
 
     if(!this.cartItems){
       this.cartItems = [
@@ -31,7 +31,7 @@ class Cart
   }
 
   saveStorage(){
-    localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+    localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
   }
 
   addToCart(productId) {
@@ -119,6 +119,8 @@ class Cart
 const cart = new Cart('cart-oop');
 const businessCart = new Cart('cart-business');
 
+//The private property cannot be changed 
+//cart.#localStorageKey = 'aaa';
 
 console.log(cart);
 console.log(businessCart);
