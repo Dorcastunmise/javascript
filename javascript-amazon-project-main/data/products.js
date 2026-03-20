@@ -38,21 +38,20 @@ class Product {
   }
 
   linkDisplay() {
-    return ` 
-     
-    `;
+    return '';
   }
 };
 
+//inheritance: resuing code between classes
 class Clothing extends Product{
   sizeChartLink;
 
   constructor(productDetail){
-    super(productDetail); //this calls the parent class and its parameter. There will no longer be the need to define the ids, name, rating etc properties
+    super(productDetail); //this calls the parent class and its parameter. There will no longer be the need to define the ids, name, rating etc properties. super() gives access to the parent class
     this.sizeChartLink = productDetail.sizeChartLink;
   }
 
-  linkDisplay() {
+  linkDisplay() { //method overriding
     return ` 
       <a href="${this.sizeChartLink}" target="_blank">
         Size Chart

@@ -48,7 +48,7 @@ products.forEach((product) => {
         </select>
       </div>
 
-      ${product.linkDisplay()}
+      ${product.linkDisplay()} <!--Polymorphism: using a method without knowing its class-->
 
       <div class="product-spacer"></div>
 
