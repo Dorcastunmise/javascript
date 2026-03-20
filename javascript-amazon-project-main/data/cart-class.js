@@ -116,12 +116,19 @@ class Cart
 }
 
 //both cart, and businessCart are objects generated from a class. Which makes them instances of the Cart() class.
+/*
 const cart = new Cart('cart-oop');
 const businessCart = new Cart('cart-business');
-
+*/
 //The private property cannot be changed 
 //cart.#localStorageKey = 'aaa';
 
+/*
 console.log(cart);
 console.log(businessCart);
 console.log(businessCart instanceof Cart)
+*/
+
+export default Cart;
+
+

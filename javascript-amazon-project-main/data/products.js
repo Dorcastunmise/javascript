@@ -1,3 +1,6 @@
+import { formatCurrency } from "../utils/currency.js";
+
+
 export function getProduct(productId){
   let matchingProduct;
 
@@ -8,6 +11,33 @@ export function getProduct(productId){
   });
   return matchingProduct;
 }
+
+class Products {
+  id;
+  image;
+  name;
+  rating;
+  priceCents;
+
+  constructor(productDetails) {
+    this.id = productDetails.id;
+    this.image = productDetails.image;
+    this.name = productDetails.name;
+    this.rating = productDetails.rating;
+    this.rating.stars = productDetails.rating.stars;
+    this.rating.count = productDetails.rating.count;
+    this.priceCents = productDetails.priceCents;
+  }
+
+  getStarsUrl(){
+    return `images/ratings/rating-${this.rating.stars * 10}.png`;
+  }
+
+  getPrice(){
+    return `$${formatCurrency(this.priceCents)}`;
+  }
+};
+
 
 export const products = [
   {
@@ -668,4 +698,14 @@ export const products = [
       "mens"
     ]
   }
-];
+].map((productDetail) => { //map() stores each item in its parameter and runs a loop of function for each item. This function adds the result of its logic (as it transforms the items) into a new array created by the map
+  /*Illustration
+    [                               [
+      product1, ===> function ===>     new Product(product1),
+      product2, ===> function ===>     new Product(product2),
+      product3, ===> function ===>     new Product(product3),
+    ]                               ]
+  */
+  return new Products(productDetail);
+});
+

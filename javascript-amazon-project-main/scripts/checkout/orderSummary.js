@@ -1,4 +1,4 @@
-import {cart, deleteCartItem, CartQuantity, updateQuantity, updateDeliveryOption} from '../../data/cart.js';
+//import {cart, deleteCartItem, CartQuantity, updateQuantity, updateDeliveryOption} from '../../data/cart.js';
 import {products, getProduct} from '../../data/products.js';
 import { formatCurrency } from '../../utils/currency.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
@@ -6,11 +6,11 @@ import { deliveryOptions, getDeliveryOption, calculateDeliveryDate } from '../..
 import renderPaymentSummary from './paymentSummary.js';
 import renderCheckoutHeader from './checkoutHeader.js';
 
-function renderOrderSummary(){
+function renderOrderSummary(cart){
   
   let cartHtml = '';
-
-  cart.forEach((cartItem) => {  
+  
+  cart.cartItems.forEach((cartItem) => {  
     const id = cartItem.productId;
     const quantity = cartItem.quantity;
 
@@ -38,7 +38,7 @@ function renderOrderSummary(){
               ${matchingProduct.name}
             </div>
             <div class="product-price">
-              $${formatCurrency(matchingProduct.priceCents)}
+              ${matchingProduct.getPrice()}
             </div>
             <div class="product-quantity js-product-quantity-${matchingProduct.id}">
               <span>
@@ -73,6 +73,7 @@ function renderOrderSummary(){
     cartHtml += html;
     
   });
+
 
   function deliveryOptionSection(matchingProduct, cartItem) {
     let optionsHTML = '';
@@ -121,7 +122,8 @@ function renderOrderSummary(){
         or
       */
       const {productId, deliveryOptionId} = radio_element.dataset;
-      updateDeliveryOption(productId, deliveryOptionId);
+    
+      cart.updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummary();
       renderPaymentSummary();
     });
@@ -130,14 +132,16 @@ function renderOrderSummary(){
   document.querySelectorAll('.js-delete-item').forEach((deleteButton) => {
       deleteButton.addEventListener('click', () => {
         const productId = deleteButton.dataset.productId;
-        deleteCartItem(productId);
+        
+        cart.deleteCartItem(productId);
           
         const targetItem = document.querySelector(`.js-cart-item-container-${productId}`);
         targetItem.remove(); 
 
         renderPaymentSummary();
         renderCheckoutHeader();
-        CartQuantity();
+        
+        cart.CartQuantity();
       });
 
 
@@ -178,7 +182,7 @@ function renderOrderSummary(){
       return;
     }
 
-    updateQuantity(productId, savedQuantity);
+    cart.updateQuantity(productId, savedQuantity);
     renderPaymentSummary();
     renderOrderSummary();
     renderCheckoutHeader();
@@ -202,7 +206,7 @@ function renderOrderSummary(){
   });
 
  
-  CartQuantity();
+  cart.CartQuantity();
 }
 
 export default renderOrderSummary

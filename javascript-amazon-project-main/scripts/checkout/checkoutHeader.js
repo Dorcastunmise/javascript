@@ -1,7 +1,7 @@
-import {calculateCartQuantity} from '../../data/cart.js';
+//import {calculateCartQuantity} from '../../data/cart.js';
 
-function renderCheckoutHeader() {
-  const count = calculateCartQuantity();
+function renderCheckoutHeader(cart) {
+  const count = cart.calculateCartQuantity();
   const suffix = count === 1 ? 'item' : 'items';
   
   const html = `
@@ -17,6 +17,6 @@ function renderCheckoutHeader() {
   return html;
 }
 
-renderCheckoutHeader();
+
 
 export default renderCheckoutHeader;

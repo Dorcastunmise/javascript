@@ -1,9 +1,10 @@
-import { addToCart, calculateCartQuantity} from "../data/cart.js";
+//import { addToCart, calculateCartQuantity} from "../data/cart.js";
 //or import * as CartModule from "../data/cart"; 
 // then to use its content:CartModule.addToCart()
 import { products } from "../data/products.js";
-import { formatCurrency } from "../utils/currency.js";
+import Cart from '../data/cart-class.js';
 
+let cart = new Cart('cart-oop');
 let productsHtml = '';
 
 products.forEach((product) => {
@@ -22,14 +23,14 @@ products.forEach((product) => {
 
       <div class="product-rating-container">
         <img class="product-rating-stars"
-          src="images/ratings/rating-${rating.stars * 10}.png">
+          src="${product.getStarsUrl()}">
         <div class="product-rating-count link-primary">
           ${rating.count}
         </div>
       </div>
 
       <div class="product-price">
-        $${formatCurrency(priceCents)}
+        ${product.getPrice()}
       </div>
 
       <div class="product-quantity-container">
@@ -73,7 +74,7 @@ document.querySelector('.js-products-grid').innerHTML = productsHtml;
 
 function updateCartQuantity() {
   
-  let cartQuantity = calculateCartQuantity();
+  let cartQuantity = cart.calculateCartQuantity();
 
   document.querySelector('.js-cart-quantity').innerText = cartQuantity; 
 }
@@ -88,7 +89,7 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
       DOMStringMap {productId: '5968897c-4d27-4872-89f6-5bcb052746d7'}productId: "5968897c-4d27-4872-89f6-5bcb052746d7"[[Prototype]]: DOMStringMap
     */
     const productId = button.dataset.productId;
-    addToCart(productId);
+    cart.addToCart(productId);
     updateCartQuantity();
   });
 });
