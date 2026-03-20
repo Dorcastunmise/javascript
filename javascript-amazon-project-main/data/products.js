@@ -12,6 +12,25 @@ export function getProduct(productId){
   return matchingProduct;
 }
 
+/*
+Details about "this"
+this is expected to be used in a method due to the availability of an object to point to. Else if used outside a method, "this" becomes "undefined"
+this lets an object access its own properties
+function logThis(){
+  console.log(this); //this keyword points to no object in a regular function, making it undefined.
+}
+logThis();
+logThis.call('hello'); //.call(input) sets the "this" keyword's value to be 'hello'...to make it have a value
+
+const obj3 = {
+  method() {
+    [1, 2, 3].forEach(() => {
+      console.log(this); // arrow functions do not change the value of "this". this is able to point to the object (obj3)
+    });
+  }
+};
+*/
+
 class Product {
   id;
   image;
@@ -20,8 +39,8 @@ class Product {
   priceCents;
 
   constructor(productDetails) {
-    this.id = productDetails.id;
-    this.image = productDetails.image;
+    this.id = productDetails.id; 
+    this.image = productDetails.image; 
     this.name = productDetails.name;
     this.rating = productDetails.rating;
     this.rating.stars = productDetails.rating.stars;
@@ -80,7 +99,6 @@ const tshirt = new Clothing(
   }
 );
 
-console.log(tshirt);
 
 export const products = [
   {
