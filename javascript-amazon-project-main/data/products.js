@@ -120,7 +120,7 @@ export function fetchProducts() {
       return new Product(productDetail);
     });
 
-    productsFunc();
+    
   });
 
   return promise;
