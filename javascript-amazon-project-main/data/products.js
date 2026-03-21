@@ -102,12 +102,39 @@ const tshirt = new Clothing(
 
 export let products = [];
 
+export function fetchProducts() {
+  // fetch() makes an HTTP get request to the backend. fetch() creates a promise (i.e the response) to use to wait for the response 
+  // instead of the callback used below i.e addEventListener('load'...
+
+  const promise = 
+  fetch('https://superSimplebackend.dev/products')
+  // next step...fetch() fetches / gets the response ( a promise) which is saved in the then parameter
+  .then((response) => {
+    return response.json();
+  }) 
+  .then((productsData) => {
+    products = productsData.map((productDetail) => { 
+      if(productDetail.type === 'clothing'){
+        return new Clothing(productDetail);
+      }
+      return new Product(productDetail);
+    });
+
+    productsFunc();
+  });
+
+  return promise;
+}
+
+
+//fetchProducts().then(() => {}); since the function returns a promise, more steps carried out using .then()
+
 // parsing a function to run in the future - callback
 export function productsLoader(productsFunc){
   const xhr = new XMLHttpRequest();
   // using addEventListener() to make .send() wait for the response as the page loads:
   xhr.addEventListener('load', () => {
-    //after the response has loaded
+    //using a callback function to get a response ...after the response has loaded we do this
     products = JSON.parse(xhr.response).map((productDetail) => { 
       if(productDetail.type === 'clothing'){
         return new Clothing(productDetail);

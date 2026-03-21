@@ -2,7 +2,7 @@ import renderOrderSummary from './checkout/orderSummary.js';
 import renderPaymentSummary from './checkout/paymentSummary.js';
 import renderCheckoutHeader from './checkout/checkoutHeader.js';
 import Cart from '../data/cart-class.js';
-import { productsLoader } from '../data/products.js';
+import { productsLoader, fetchProducts } from '../data/products.js';
 import { cartsLoader } from '../data/cart.js';
 //import '../data/backend-practice.js';
 
@@ -12,6 +12,9 @@ const cart = new Cart('cart-oop');
 //Promise() enables JavaScript to run multiple code at same time
 //Promise.all([]) - enables the programmer to run multiple promises at the same time
 Promise.all([
+  //fetchProducts() is used in place of  new Promise( ... productsLoader... since fetchProducts() returns a promise
+  fetchProducts()
+  /*
   new Promise((resolve) => {
     //this inner function runs immediately
     productsLoader(() => {
@@ -19,7 +22,7 @@ Promise.all([
       //resolve('value1') this function accepts values to be passed. and such values are used in .then
     });
 
-  }),
+  }) */,
   new Promise((resolve) => {
     cartsLoader(() => {
       resolve();

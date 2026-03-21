@@ -1,6 +1,6 @@
 import renderOrderSummary from '../../../scripts/checkout/orderSummary.js'
 import { loadStorage, cart } from '../../../data/cart.js';
-import { productsLoader } from '../../data/products.js';
+import { productsLoader, fetchProducts } from '../../data/products.js';
 
 
 //Integration Test: testing many units.pieces of code working together
@@ -12,10 +12,14 @@ describe('Test suite: renderOrderSummary functionality', () => {
   // Useful for expensive setup that doesn't need to reset between tests
   //done() - Jasmine function : here it will not allow beforeAll() to automatically go to the next step untill done() is called. It controls when to go to the next step
   beforeAll((done) => {
+    fetchProducts().then(() => {
+      done();
+    });
+    /*
     productsLoader(() => {
       done();
     }); //since this function is asynchronous, done() lets the response to be received beofre the tests run
-    
+    */
   });
 
   //beforeEach() hook runs before each test case here
