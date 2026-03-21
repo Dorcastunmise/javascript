@@ -100,7 +100,31 @@ const tshirt = new Clothing(
   }
 );
 
+export let products = [];
 
+// parsing a function to run in the future - callback
+export function productsLoader(productsFunc){
+  const xhr = new XMLHttpRequest();
+  //to make .send() wait for the response:
+  xhr.addEventListener('load', () => {
+    //after the response has loaded
+    products = JSON.parse(xhr.response).map((productDetail) => { 
+      if(productDetail.type === 'clothing'){
+        return new Clothing(productDetail);
+      }
+      return new Product(productDetail);
+    });
+
+    productsFunc();
+  });
+
+
+  xhr.open('GET', 'https://superSimplebackend.dev/products');
+  xhr.send(); //this is asynchronous - it sends the request but does not waith for a response
+}
+
+
+/*
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -761,13 +785,13 @@ export const products = [
     ]
   }
 ].map((productDetail) => { //map() stores each item in its parameter and runs a loop of function for each item. This function adds the result of its logic (as it transforms the items) into a new array created by the map
-  /*Illustration
+  Illustration
     [                               [
       product1, ===> function ===>     new Product(product1),
       product2, ===> function ===>     new Product(product2),
       product3, ===> function ===>     new Product(product3),
     ]                               ]
-  */
+  
 
   // clothing is a discriminator property that tells what class the object should be converted to
   if(productDetail.type === 'clothing'){
@@ -776,3 +800,4 @@ export const products = [
   return new Product(productDetail);
 });
 
+*/
