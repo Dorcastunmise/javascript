@@ -106,5 +106,19 @@ function updateDeliveryOption(productId, deliveryOptionId){
   
 }
 
+export function cartsLoader(cartsFunc){
+  const xhr = new XMLHttpRequest();
+  // using addEventListener() to make .send() wait for the response as the page loads:
+  xhr.addEventListener('load', () => {
+    //after the response has loaded
+    let carts = xhr.response;
+    console.log(carts);
+    cartsFunc();
+  });
+
+
+  xhr.open('GET', 'https://superSimplebackend.dev/cart');
+  xhr.send(); //this is asynchronous - it sends the request but does not waith for a response
+}
 
 export { addToCart, deleteCartItem, CartQuantity, calculateCartQuantity, updateQuantity, updateDeliveryOption };

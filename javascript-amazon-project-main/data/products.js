@@ -105,7 +105,7 @@ export let products = [];
 // parsing a function to run in the future - callback
 export function productsLoader(productsFunc){
   const xhr = new XMLHttpRequest();
-  //to make .send() wait for the response:
+  // using addEventListener() to make .send() wait for the response as the page loads:
   xhr.addEventListener('load', () => {
     //after the response has loaded
     products = JSON.parse(xhr.response).map((productDetail) => { 
