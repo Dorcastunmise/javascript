@@ -60,8 +60,9 @@ function renderProductsGrid(){
           ${product.getPrice()}
         </div>
 
-        <div class="product-quantity-container">
-          <select>
+        <div class="product-quantity-container"
+        >
+          <select  class="js-quantity-selector" data-product-id="${id}">
             <option selected value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -117,8 +118,14 @@ function renderProductsGrid(){
         e.g button.dataset gives:
         DOMStringMap {productId: '5968897c-4d27-4872-89f6-5bcb052746d7'}productId: "5968897c-4d27-4872-89f6-5bcb052746d7"[[Prototype]]: DOMStringMap
       */
+     
       const productId = button.dataset.productId;
-      cart.addToCart(productId);
+      const quantitySelector = document.querySelector(
+        `.js-quantity-selector[data-product-id="${productId}"]`
+      );
+      const quantity = Number(quantitySelector.value);
+     
+      cart.addToCart(productId, quantity);
       updateCartQuantity();
     });
   });

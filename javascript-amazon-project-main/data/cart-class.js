@@ -34,25 +34,22 @@ class Cart
     localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
   }
 
-  addToCart(productId) {
+  addToCart(productId, quantity = 1) {
     let matchingItem;
-
     this.cartItems.forEach((cartItem) => {
-      if(productId == cartItem.productId) {
+      if (productId === cartItem.productId) {
         matchingItem = cartItem;
       }
     });
-
-    if(matchingItem) {
-      matchingItem.quantity++;
+    if (matchingItem) {
+      matchingItem.quantity += quantity;  // was: quantity++
     } else {
       this.cartItems.push({
         productId: productId,
-        quantity: 1,
+        quantity: quantity,               // was: quantity: 1
         deliveryOptionId: '1'
       });
     }
-
     this.saveStorage();
     this.CartQuantity();
   }

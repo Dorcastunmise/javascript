@@ -5,6 +5,8 @@ import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { deliveryOptions, getDeliveryOption, calculateDeliveryDate } from '../../data/deliveryOptions.js'
 import renderPaymentSummary from './paymentSummary.js';
 import renderCheckoutHeader from './checkoutHeader.js';
+import {cart} from '../../data/cart.js';
+
 
 function renderOrderSummary(cart){
   
@@ -124,8 +126,8 @@ function renderOrderSummary(cart){
       const {productId, deliveryOptionId} = radio_element.dataset;
     
       cart.updateDeliveryOption(productId, deliveryOptionId);
-      renderOrderSummary();
-      renderPaymentSummary();
+      renderOrderSummary(cart);
+      renderPaymentSummary(cart);
     });
   });
 
@@ -183,9 +185,9 @@ function renderOrderSummary(cart){
     }
 
     cart.updateQuantity(productId, savedQuantity);
-    renderPaymentSummary();
-    renderOrderSummary();
-    renderCheckoutHeader();
+    renderPaymentSummary(cart);
+    renderOrderSummary(cart);
+    renderCheckoutHeader(cart);
     
   }
 
