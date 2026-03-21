@@ -15,17 +15,26 @@ const cart = new Cart('cart-oop');
   Async form:
 */
 async function pageLoader() {
-  await fetchProducts();
-  await new Promise((resolve) => {
-    cartsLoader(() => {
-      resolve();
+  try {
+    //throw 'error'; to manually create an error in try/catch
+    await fetchProducts();
+    //reject can be passed as well to create an error in the future
+    await new Promise((resolve, reject) => {
+      //throw 'error'; to manually create an error in promise too
+      cartsLoader(() => {
+        //reject('error3');
+        resolve();
+      });
     });
-  });
-  
+
+  } catch (error){
+    alert('Error encountered: ' + error);
+  } finally {}
+
   renderOrderSummary(cart);
   renderPaymentSummary(cart);
   renderCheckoutHeader(cart);
-  
+ 
 }
 
 pageLoader();

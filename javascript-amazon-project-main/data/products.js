@@ -121,6 +121,9 @@ export function fetchProducts() {
     });
 
     
+  })
+  .catch((error) => {
+    console.log(error);
   });
 
   return promise;
@@ -132,7 +135,7 @@ export function fetchProducts() {
 // parsing a function to run in the future - callback
 export function productsLoader(productsFunc){
   const xhr = new XMLHttpRequest();
-  // using addEventListener() to make .send() wait for the response as the page loads:
+  // using addEventListener() as a callback to make .send() wait for the response as the page loads:
   xhr.addEventListener('load', () => {
     //using a callback function to get a response ...after the response has loaded we do this
     products = JSON.parse(xhr.response).map((productDetail) => { 
@@ -143,6 +146,10 @@ export function productsLoader(productsFunc){
     });
 
     productsFunc();
+  });
+
+  xhr.addEventListener('error', () => {
+    console.log('something went wrong! Try again later');
   });
 
 

@@ -2,6 +2,8 @@
 import {getProduct} from '../../data/products.js';
 import {getDeliveryOption} from '../../data/deliveryOptions.js';
 import { formatCurrency } from '../../utils/currency.js';
+import {addOrder} from '../../data/orders.js';
+
 
 function renderPaymentSummary(cart){
   let productPriceCents = 0;
@@ -56,15 +58,40 @@ function renderPaymentSummary(cart){
       <div class="payment-summary-money">$${formatCurrency(totalCents)}</div>
     </div>
 
-    <button class="place-order-button button-primary">
+    <button 
+      class="place-order-button button-primary js-place-order
+    ">
       Place your order
     </button>
   `;
 
   document.querySelector('.payment-summary').innerHTML = paymentSummaryHTML;
+  document.querySelector('.js-place-order')
+    .addEventListener('click', async () => {
+      try {
+        const response = await fetch('https://superSimplebackend.dev/orders', {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify({
+            cart: cart
+          })
+        });
 
+          const order = await response.json(); //using await since response.json() returns a promise
+          addOrder(order);
+      } catch (error) {
+        console.log(`Error: ${error}`);
+      }
+
+      /*
+        window.location - enables access to browser's url. The Window.location read-only property returns a Location object with information about the current location of the document.
+        The href property of the Location interface is a stringifier that returns a string containing the whole URL, and allows the href to be updated.
+      */
+      window.location.href = 'orders.html';
+
+    });
 }
-
-
 
 export default renderPaymentSummary;
