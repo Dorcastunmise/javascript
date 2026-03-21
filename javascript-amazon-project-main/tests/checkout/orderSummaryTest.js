@@ -8,18 +8,22 @@ import { productsLoader, fetchProducts } from '../../data/products.js';
 
 describe('Test suite: renderOrderSummary functionality', () => {
 
-  // beforeAll() runs ONCE before all tests in this describe block
+  /* beforeAll() runs ONCE before all tests in this describe block
   // Useful for expensive setup that doesn't need to reset between tests
   //done() - Jasmine function : here it will not allow beforeAll() to automatically go to the next step untill done() is called. It controls when to go to the next step
   beforeAll((done) => {
-    fetchProducts().then(() => {
-      done();
-    });
-    /*
+    fetchProducts()
+      .then(() => {
+        done();
+      });
+  });
+    
     productsLoader(() => {
       done();
     }); //since this function is asynchronous, done() lets the response to be received beofre the tests run
-    */
+  */
+  beforeAll( async () => {
+    await fetchProducts();  
   });
 
   //beforeEach() hook runs before each test case here

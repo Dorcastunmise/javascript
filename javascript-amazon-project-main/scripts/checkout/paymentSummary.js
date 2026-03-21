@@ -3,6 +3,8 @@ import {getProduct} from '../../data/products.js';
 import {getDeliveryOption} from '../../data/deliveryOptions.js';
 import { formatCurrency } from '../../utils/currency.js';
 import {addOrder} from '../../data/orders.js';
+import {resetCart} from '../../data/cart.js';
+
 
 
 function renderPaymentSummary(cart){
@@ -89,6 +91,9 @@ function renderPaymentSummary(cart){
         window.location - enables access to browser's url. The Window.location read-only property returns a Location object with information about the current location of the document.
         The href property of the Location interface is a stringifier that returns a string containing the whole URL, and allows the href to be updated.
       */
+     
+      //making the cart empty after creating an order.
+      resetCart();
       window.location.href = 'orders.html';
 
     });

@@ -121,4 +121,19 @@ export function cartsLoader(cartsFunc){
   xhr.send(); //this is asynchronous - it sends the request but does not waith for a response
 }
 
+export async function loadCartFetch() {
+  try {
+    const response = await fetch('https://superSimplebackend.dev/cart');
+    const text = await response.text;
+    console.log(text);
+    return text;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export function resetCart() {
+  cart = [];
+  saveStorage();
+}
 export { addToCart, deleteCartItem, CartQuantity, calculateCartQuantity, updateQuantity, updateDeliveryOption };

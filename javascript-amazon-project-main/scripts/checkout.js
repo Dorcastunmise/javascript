@@ -3,7 +3,7 @@ import renderPaymentSummary from './checkout/paymentSummary.js';
 import renderCheckoutHeader from './checkout/checkoutHeader.js';
 import Cart from '../data/cart-class.js';
 import { fetchProducts } from '../data/products.js';
-import { cartsLoader } from '../data/cart.js';
+import { cartsLoader, loadCartFetch } from '../data/cart.js';
 //import '../data/backend-practice.js';
 
 const cart = new Cart('cart-oop');
@@ -16,19 +16,27 @@ const cart = new Cart('cart-oop');
 */
 async function pageLoader() {
   try {
-    //throw 'error'; to manually create an error in try/catch
-    await fetchProducts();
-    //reject can be passed as well to create an error in the future
-    await new Promise((resolve, reject) => {
-      //throw 'error'; to manually create an error in promise too
-      cartsLoader(() => {
-        //reject('error3');
-        resolve();
-      });
-    });
+    /*
+      throw 'error'; to manually create an error in try/catch
+      
+      reject can be passed as well to create an error in the future
+      
+      await new Promise((resolve, reject) => {
+        //throw 'error'; to manually create an error in promise too
+        cartsLoader(() => {
+          //reject('error3');
+          resolve();
+        });
+      }); 
+    */
+   await Promise.all([
+    await fetchProducts(),
+    await loadCartFetch()
+   ]);
+    
 
   } catch (error){
-    alert('Error encountered: ' + error);
+    console.log('Error encountered: ' + error);
   } finally {}
 
   renderOrderSummary(cart);
